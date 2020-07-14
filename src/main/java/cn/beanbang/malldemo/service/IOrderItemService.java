@@ -1,6 +1,6 @@
 package cn.beanbang.malldemo.service;
 
-import cn.beanbang.malldemo.model.OrderItem;
+import cn.beanbang.malldemo.domain.po.OrderItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

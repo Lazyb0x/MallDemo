@@ -1,4 +1,4 @@
-package cn.beanbang.malldemo.model;
+package cn.beanbang.malldemo.domain.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -14,18 +14,18 @@ import java.io.Serializable;
  * @author Lazyb0x
  * @since 2020-07-10
  */
-public class OrderItem extends Model<OrderItem> {
+public class Good extends Model<Good> {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Long goodId;
+    private String name;
 
-    private Long orderId;
+    private Float price;
 
-    private Integer number;
+    private Integer stock;
 
 
     public Long getId() {
@@ -36,28 +36,28 @@ public class OrderItem extends Model<OrderItem> {
         this.id = id;
     }
 
-    public Long getGoodId() {
-        return goodId;
+    public String getName() {
+        return name;
     }
 
-    public void setGoodId(Long goodId) {
-        this.goodId = goodId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Float getPrice() {
+        return price;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     @Override
@@ -67,11 +67,11 @@ public class OrderItem extends Model<OrderItem> {
 
     @Override
     public String toString() {
-        return "OrderItem{" +
+        return "Good{" +
         "id=" + id +
-        ", goodId=" + goodId +
-        ", orderId=" + orderId +
-        ", number=" + number +
+        ", name=" + name +
+        ", price=" + price +
+        ", stock=" + stock +
         "}";
     }
 }

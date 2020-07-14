@@ -1,10 +1,10 @@
 package cn.beanbang.malldemo.controller;
 
 
-import cn.beanbang.malldemo.model.Good;
+import cn.beanbang.malldemo.domain.po.Good;
+import cn.beanbang.malldemo.domain.to.Result;
 import cn.beanbang.malldemo.service.IGoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,8 +29,8 @@ public class GoodController {
      * @return 商品列表
      */
     @GetMapping
-    public List<Good> list(){
-        return goodService.list();
+    public Result list(){
+        return Result.success(goodService.list());
     }
 
     /**
@@ -39,9 +39,8 @@ public class GoodController {
      * @return 包含有 Id 的商品对象
      */
     @PostMapping
-    public Good add(@RequestBody Good good){
-        goodService.save(good);
-        return good;
+    public Result add(@RequestBody Good good){
+        return Result.success(goodService.save(good));
     }
 
     /**
@@ -50,8 +49,9 @@ public class GoodController {
      * @return 是否修改成功
      */
     @PutMapping
-    public boolean update(@RequestBody Good good){
-        return goodService.saveOrUpdate(good);
+    public Result update(@RequestBody Good good){
+        boolean res = goodService.saveOrUpdate(good);
+        return Result.isSuccess(res);
     }
 
     /**
@@ -60,8 +60,9 @@ public class GoodController {
      * @return 是否删除成功
      */
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable long id){
-        return goodService.removeById(id);
+    public Result delete(@PathVariable long id){
+        boolean res = goodService.removeById(id);
+        return Result.isSuccess(res);
     }
 }
 

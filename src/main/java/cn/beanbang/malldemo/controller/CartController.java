@@ -1,5 +1,6 @@
 package cn.beanbang.malldemo.controller;
 
+import cn.beanbang.malldemo.domain.to.Result;
 import cn.beanbang.malldemo.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,23 +19,27 @@ public class CartController {
     CartService cartService;
 
     @GetMapping
-    public Object list(){
-        return cartService.list();
+    public Result list(){
+//        return cartService.list();
+        return Result.success(cartService.list());
     }
 
     @PostMapping
-    public boolean add(Long goodId){
-        return cartService.add(goodId);
+    public Result add(Long goodId){
+        boolean res = cartService.add(goodId);
+        return Result.isSuccess(res);
     }
 
     @PutMapping
-    public boolean edit(Long goodId, int num){
-        return cartService.add(goodId, num);
+    public Result edit(Long goodId, int num){
+        boolean res = cartService.add(goodId, num);
+        return Result.isSuccess(res);
     }
 
     @DeleteMapping
-    public boolean remove(Long goodId){
-        return cartService.remove(goodId);
+    public Result remove(Long goodId){
+        boolean res = cartService.remove(goodId);
+        return Result.isSuccess(res);
     }
 
     /**
@@ -42,7 +47,9 @@ public class CartController {
      * @return 保存的订单id
      */
     @PostMapping("/settle")
-    public Long settle(){
-        return cartService.settle();
+    public Result settle(){
+        Long res = cartService.settle();
+        return Result.success(res);
     }
+
 }

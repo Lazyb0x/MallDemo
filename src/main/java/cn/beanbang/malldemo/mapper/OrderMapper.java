@@ -1,6 +1,6 @@
 package cn.beanbang.malldemo.mapper;
 
-import cn.beanbang.malldemo.model.Order;
+import cn.beanbang.malldemo.domain.po.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

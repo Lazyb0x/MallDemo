@@ -1,9 +1,7 @@
 package cn.beanbang.malldemo.service;
 
-import cn.beanbang.malldemo.model.Order;
+import cn.beanbang.malldemo.domain.po.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
 
 /**
  * <p>

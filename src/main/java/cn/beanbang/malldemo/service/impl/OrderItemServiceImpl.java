@@ -1,7 +1,7 @@
 package cn.beanbang.malldemo.service.impl;
 
 import cn.beanbang.malldemo.mapper.OrderItemMapper;
-import cn.beanbang.malldemo.model.OrderItem;
+import cn.beanbang.malldemo.domain.po.OrderItem;
 import cn.beanbang.malldemo.service.IOrderItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

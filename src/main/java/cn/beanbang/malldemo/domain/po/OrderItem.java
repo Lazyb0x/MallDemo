@@ -1,4 +1,4 @@
-package cn.beanbang.malldemo.model;
+package cn.beanbang.malldemo.domain.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -14,18 +14,18 @@ import java.io.Serializable;
  * @author Lazyb0x
  * @since 2020-07-10
  */
-public class Good extends Model<Good> {
+public class OrderItem extends Model<OrderItem> {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String name;
+    private Long goodId;
 
-    private Float price;
+    private Long orderId;
 
-    private Integer stock;
+    private Integer number;
 
 
     public Long getId() {
@@ -36,28 +36,28 @@ public class Good extends Model<Good> {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Long getGoodId() {
+        return goodId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGoodId(Long goodId) {
+        this.goodId = goodId;
     }
 
-    public Float getPrice() {
-        return price;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public Integer getStock() {
-        return stock;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     @Override
@@ -67,11 +67,11 @@ public class Good extends Model<Good> {
 
     @Override
     public String toString() {
-        return "Good{" +
+        return "OrderItem{" +
         "id=" + id +
-        ", name=" + name +
-        ", price=" + price +
-        ", stock=" + stock +
+        ", goodId=" + goodId +
+        ", orderId=" + orderId +
+        ", number=" + number +
         "}";
     }
 }

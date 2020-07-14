@@ -2,12 +2,11 @@ package cn.beanbang.malldemo.service.impl;
 
 import cn.beanbang.malldemo.mapper.OrderItemMapper;
 import cn.beanbang.malldemo.mapper.OrderMapper;
-import cn.beanbang.malldemo.model.Order;
-import cn.beanbang.malldemo.model.OrderItem;
+import cn.beanbang.malldemo.domain.po.Order;
+import cn.beanbang.malldemo.domain.po.OrderItem;
 import cn.beanbang.malldemo.service.IOrderService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

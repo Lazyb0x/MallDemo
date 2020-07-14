@@ -2,8 +2,8 @@ package cn.beanbang.malldemo.service;
 
 import cn.beanbang.malldemo.mapper.OrderItemMapper;
 import cn.beanbang.malldemo.mapper.OrderMapper;
-import cn.beanbang.malldemo.model.Order;
-import cn.beanbang.malldemo.model.OrderItem;
+import cn.beanbang.malldemo.domain.po.Order;
+import cn.beanbang.malldemo.domain.po.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +24,6 @@ public class CartService {
     @Resource
     private OrderItemMapper orderItemMapper;
 
-    private Map<Long, OrderItem> cartMap;
-
     /**
      * 通过id添加一个订单项
      * @param goodId 商品id
@@ -42,7 +40,7 @@ public class CartService {
      * @return true
      */
     public boolean add(Long goodId, int num) {
-        getCart();
+        Map<Long, OrderItem> cartMap = getCart();
         OrderItem oi = cartMap.get(goodId);
         // 购物车中是否已经有了该商品
         if (oi != null) {
@@ -67,7 +65,7 @@ public class CartService {
      * @return map 键值对列表
      */
     public Object list(){
-        getCart();
+        Map<Long, OrderItem> cartMap = getCart();
         return cartMap.entrySet().toArray();
     }
 
@@ -77,7 +75,7 @@ public class CartService {
      * @return
      */
     public boolean remove(Long goodId){
-        getCart();
+        Map<Long, OrderItem> cartMap = getCart();
         cartMap.remove(goodId);
         return true;
     }
@@ -87,7 +85,8 @@ public class CartService {
      * @return
      */
     public Map<Long, OrderItem> getCart() {
-        this.cartMap = (Map) session.getAttribute("shoppingCart");
+        Map<Long, OrderItem> cartMap;
+        cartMap = (Map) session.getAttribute("shoppingCart");
         if (cartMap == null) {
             cartMap = new HashMap<>();
             session.setAttribute("shoppingCart", cartMap);
@@ -101,6 +100,7 @@ public class CartService {
      * @return
      */
     public long settle() {
+        Map<Long, OrderItem> cartMap = getCart();
 
         Order order = new Order();
         // 先把时间戳当序列号
