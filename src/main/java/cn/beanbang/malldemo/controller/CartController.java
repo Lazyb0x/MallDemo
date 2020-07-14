@@ -1,7 +1,8 @@
 package cn.beanbang.malldemo.controller;
 
 import cn.beanbang.malldemo.domain.to.Result;
-import cn.beanbang.malldemo.service.CartService;
+import cn.beanbang.malldemo.service.ICartService;
+import cn.beanbang.malldemo.service.impl.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
 
     @Autowired
-    CartService cartService;
+    ICartService cartService;
 
     @GetMapping
     public Result list(){
-//        return cartService.list();
         return Result.success(cartService.list());
     }
 

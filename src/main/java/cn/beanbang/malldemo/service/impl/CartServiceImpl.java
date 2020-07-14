@@ -1,11 +1,15 @@
-package cn.beanbang.malldemo.service;
+package cn.beanbang.malldemo.service.impl;
 
 import cn.beanbang.malldemo.mapper.OrderItemMapper;
 import cn.beanbang.malldemo.mapper.OrderMapper;
 import cn.beanbang.malldemo.domain.po.Order;
 import cn.beanbang.malldemo.domain.po.OrderItem;
+import cn.beanbang.malldemo.service.ICartService;
+import cn.beanbang.malldemo.tools.IdWorker;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -13,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class CartService {
+public class CartServiceImpl implements ICartService {
 
     @Autowired
     private HttpSession session;
@@ -29,6 +33,7 @@ public class CartService {
      * @param goodId 商品id
      * @return 是否添加成功
      */
+    @Override
     public boolean add(Long goodId){
         return add(goodId, 1);
     }
@@ -39,6 +44,7 @@ public class CartService {
      * @param num 商品的数量
      * @return true
      */
+    @Override
     public boolean add(Long goodId, int num) {
         Map<Long, OrderItem> cartMap = getCart();
         OrderItem oi = cartMap.get(goodId);
@@ -64,6 +70,7 @@ public class CartService {
      * 列出购物车列表
      * @return map 键值对列表
      */
+    @Override
     public Object list(){
         Map<Long, OrderItem> cartMap = getCart();
         return cartMap.entrySet().toArray();
@@ -74,6 +81,7 @@ public class CartService {
      * @param goodId
      * @return
      */
+    @Override
     public boolean remove(Long goodId){
         Map<Long, OrderItem> cartMap = getCart();
         cartMap.remove(goodId);
@@ -99,12 +107,16 @@ public class CartService {
      * 把购物车的内容存到订单和订单项中
      * @return
      */
+    @Transactional
+    @Override
     public long settle() {
         Map<Long, OrderItem> cartMap = getCart();
 
         Order order = new Order();
-        // 先把时间戳当序列号
-        String sn = Long.toString(System.currentTimeMillis());
+        // 使用雪花算法当作序列号
+        String sn;
+        IdWorker idWorker = new IdWorker(1,1);
+        sn = Long.toString(idWorker.nextId());
         order.setSn(sn);
         order.setUid(getUserId());
 
